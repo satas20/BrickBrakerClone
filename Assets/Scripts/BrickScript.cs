@@ -4,34 +4,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Brick : MonoBehaviour
+public class BrickScript : MonoBehaviour
 {
-    public int health;
+    //Brick variables.
+    private int _health;
+    private Vector3 _originalScale;
+    private Vector3 _originalPosition;
+    
+    //Animation Tweens.    
     private Tweener _shakeTween;
     private Sequence _jumpTween;
 
-    private Vector3 _originalScale;
-    private Vector3 _originalPosition;
 
 
     private void Start()
     {
+        //Setting values for the brick.
         _originalPosition = transform.position;
         _originalScale = transform.localScale;
-        BallScript.instance.ballCollision += BrickShake;
-        BallScript.instance.ballCollision += BrickJump;
+        
+        
+        //Subscribing to ballCollision  event.
+        BallScript.Instance.BallCollision += BrickShake;
+        BallScript.Instance.BallCollision += BrickJump;
 
     }
 
-    
+    //Reduces the health of the brick and calls BrakeBrick it if health is 0.
     private void Hit(Collision2D collision)
     {
-        health--;
-        if (health == 0){
+        _health--;
+        if (_health == 0){
             BrickBreak( collision);
         }    
     
     }
+    
+    //Makes Brick a little jump.
     private void BrickJump(object sender, EventArgs e)
     {
        
@@ -45,6 +54,8 @@ public class Brick : MonoBehaviour
             transform.DOMove(_originalPosition, 0.1f);
         });
     }
+    
+    //Shakes the brick.
     private void BrickShake(object sender, EventArgs e)
     {
        
@@ -57,19 +68,8 @@ public class Brick : MonoBehaviour
             transform.DOScale(_originalScale, 0.1f);
         });
     }
-    private void BrickBreak(Collision2D collision2D){
-        BallScript.instance.ballCollision -= BrickShake;
-        BallScript.instance.ballCollision -= BrickJump;
-        _shakeTween.Kill();
-        _jumpTween.Kill();
-        ThrowBrick(collision2D);
-        DarkenBrick();
-        transform.DOScale(0,1).OnComplete(()=>
-        {
-            DestroyBrick();
-        });
-    }
-
+    
+    //Throws and rotates the brick in the direction of the ball using rigidbody physics collision point.
     private void ThrowBrick(Collision2D collision2D)
     {
         
@@ -82,15 +82,28 @@ public class Brick : MonoBehaviour
         rb.AddTorque(force.x, ForceMode2D.Impulse);
         GetComponent<BoxCollider2D>().isTrigger = true;
     }
-
+    
+    //Darkens the brick color to black.
     private void DarkenBrick()
     {
         GetComponent<SpriteRenderer>().DOColor(Color.black, 0.85f);
     }
-    private void DestroyBrick( ){
-        Destroy(gameObject);
+    
+    //Kills the animations, calls the Bricks braking animations and destroys when completed.
+    private void BrickBreak(Collision2D collision2D){
+        BallScript.Instance.BallCollision -= BrickShake;
+        BallScript.Instance.BallCollision -= BrickJump;
+        _shakeTween.Kill();
+        _jumpTween.Kill();
+        ThrowBrick(collision2D);
+        DarkenBrick();
+        transform.DOScale(0,1).OnComplete(()=>
+        {
+            Destroy(gameObject);
+        });
     }
-
+    
+    //Checks if the collision is with the ball and calls Hit.
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ball"))

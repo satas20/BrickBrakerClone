@@ -5,24 +5,22 @@ using UnityEngine;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class BallScript : MonoBehaviour
 {
-    public static BallScript instance;
-    //public UnityEvent ballCollision;
-    public event EventHandler ballCollision;
+    public static BallScript Instance; // Singleton
+    public event EventHandler BallCollision; // Event that calls when ball collides with something.
     
-    [SerializeField] float maxSpeed;
-    [SerializeField] float startSpeed;
-    [SerializeField] GameObject ballRenderer;
+    [SerializeField] private float speed=10; // Ball speed.
+    [SerializeField] GameObject ballRenderer; // Ball sprite rendered as a child.
 
-    private float _speed=10;
-    private Rigidbody2D rb;
-
+    private Rigidbody2D _rb;
     private Vector3 _originalScale;
     private Color _orginalColor;
 
+    //Animation Tweens.
     private Tweener _scaleTween;
     private Tweener _strechTween;
     private Tweener _woobleTween;
@@ -30,14 +28,15 @@ public class BallScript : MonoBehaviour
 
     private void Awake()
     {
-         instance = this;
+         Instance = this;
     }
 
     void Start()
     {
+        //Setting values.
         _orginalColor = ballRenderer.GetComponent<SpriteRenderer>().color;
         _originalScale = transform.localScale;
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
         Invoke(nameof(SetRandomTrajectory), 1);
     }
 
@@ -45,18 +44,20 @@ public class BallScript : MonoBehaviour
     private void FixedUpdate()
     {
         
-        rb.velocity = rb.velocity.normalized * _speed;
+        _rb.velocity = _rb.velocity.normalized * speed;
         FaceVelocity();
     }
     
-
+    //Adds  random force to the ball called at start of the game. 
     private void SetRandomTrajectory() 
     {
         Vector2 force = new Vector2(Random.Range(-2f, 2f), 1);
         
-        rb.AddForce(force.normalized* _speed, ForceMode2D.Impulse);
+        _rb.AddForce(force.normalized* speed, ForceMode2D.Impulse);
         transform.parent = null;
     }
+    
+    //Scale effect for the ball.
     private void ScaleObject(){
         if (_scaleTween != null && _scaleTween.IsActive())
         {
@@ -69,10 +70,12 @@ public class BallScript : MonoBehaviour
             });
         });
     }
+    
+    //Faces the ball to the direction of the velocity vector.
     private void FaceVelocity()
     {
         // Get the velocity vector of the 2D ball
-        Vector2 velocity = rb.velocity;
+        Vector2 velocity = _rb.velocity;
 
         // Calculate the target position by adding the velocity to the current position
         Vector3 targetPosition = (Vector3)transform.position + new Vector3(velocity.x, velocity.y, 0);
@@ -81,6 +84,7 @@ public class BallScript : MonoBehaviour
         transform.up = targetPosition - transform.position;
     }
     
+    //Wobble effect for the ball.
     private void WobbleBall(){
         if (_woobleTween != null && _scaleTween.IsActive())
         {
@@ -91,6 +95,8 @@ public class BallScript : MonoBehaviour
             ballRenderer.transform.DOScale(Vector3.one, 0.1f);
         });
     }
+    
+    //Highlight effect for the ball.
     private void HighlightBall(){
         if (_colorTween != null && _scaleTween.IsActive())
         {
@@ -109,16 +115,14 @@ public class BallScript : MonoBehaviour
         
     }
 
-    private void ScreenShake(){ }
-
     
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //FaceVelocity();FaceVelocity Called in update 
+        //FaceVelocity(); FaceVelocity Called in update 
         //WobbleBall(); Wobble process Starts end of the ScaleObject animation
         ScaleObject();
         HighlightBall();
-        ballCollision?.Invoke(this,EventArgs.Empty);
+        
+        BallCollision?.Invoke(this,EventArgs.Empty); 
     }
 }

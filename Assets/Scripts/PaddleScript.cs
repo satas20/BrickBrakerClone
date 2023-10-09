@@ -1,31 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PaddleScript : MonoBehaviour
 {
     [SerializeField] private float maxPosx;
     [SerializeField] float maxBounceAngle;
+    
+    private Camera _mainCamera;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        _mainCamera = Camera.main;
     }
 
-    // Update is called once per frame
     void Update()
     {
         HandleMovement();
     }
 
-
+    // Moves the paddle to the mouse  x position.
     private void HandleMovement() 
     {
-        float padPos= Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
+        float padPos= _mainCamera.ScreenToWorldPoint(Input.mousePosition).x; // taking mouse position according to camera.
         
-        transform.position = new Vector2(Mathf.Clamp(padPos,-maxPosx,maxPosx),transform.position.y) ;
-
+        // Assigning and clamping the paddle position according to the screen size.
+        transform.position = new Vector2(Mathf.Clamp(padPos,-maxPosx,maxPosx),transform.position.y) ; 
     }
+   
+    //Bending the ball angle according to the landing position on the paddle using rigidbody of the ball.
     private void HandleBallBounce(Collision2D collision)
     {
         Rigidbody2D ball = collision.rigidbody;
