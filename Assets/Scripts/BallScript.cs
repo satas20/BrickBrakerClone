@@ -1,57 +1,68 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class BallScript : MonoBehaviour
 {
-    public UnityEvent ballCollision;
+    public static BallScript instance;
+    //public UnityEvent ballCollision;
+    public event EventHandler ballCollision;
+    
     [SerializeField] float maxSpeed;
     [SerializeField] float startSpeed;
     [SerializeField] GameObject ballRenderer;
 
-    private float speed=10;
+    private float _speed=10;
     private Rigidbody2D rb;
 
     private Vector3 _originalScale;
     private Color _orginalColor;
 
-    private Tweener scaleTween;
-    private Tweener strechTween;
-    private Tweener woobleTween;
-    private Tweener colorTween;
+    private Tweener _scaleTween;
+    private Tweener _strechTween;
+    private Tweener _woobleTween;
+    private Tweener _colorTween;
+
+    private void Awake()
+    {
+         instance = this;
+    }
 
     void Start()
     {
         _orginalColor = ballRenderer.GetComponent<SpriteRenderer>().color;
         _originalScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
-        Invoke(nameof(setRandomTrajectory), 1);
+        Invoke(nameof(SetRandomTrajectory), 1);
     }
 
    
     private void FixedUpdate()
     {
         
-        rb.velocity = rb.velocity.normalized * speed;
+        rb.velocity = rb.velocity.normalized * _speed;
         FaceVelocity();
     }
     
 
-    private void setRandomTrajectory() 
+    private void SetRandomTrajectory() 
     {
         Vector2 force = new Vector2(Random.Range(-2f, 2f), 1);
         
-        rb.AddForce(force.normalized* speed, ForceMode2D.Impulse);
+        rb.AddForce(force.normalized* _speed, ForceMode2D.Impulse);
         transform.parent = null;
     }
     private void ScaleObject(){
-        if (scaleTween != null && scaleTween.IsActive())
+        if (_scaleTween != null && _scaleTween.IsActive())
         {
-            scaleTween.Kill();
+            _scaleTween.Kill();
         }
-        scaleTween =ballRenderer.transform.DOScale(new Vector3(2,3.5f,2), 0.1f).OnComplete(() =>
+        _scaleTween =ballRenderer.transform.DOScale(new Vector3(2,3.5f,2), 0.1f).OnComplete(() =>
         {
             ballRenderer.transform.DOScale(Vector3.one, 0.1f).OnComplete(()=> {
                 WobbleBall();
@@ -71,25 +82,31 @@ public class BallScript : MonoBehaviour
     }
     
     private void WobbleBall(){
-        if (woobleTween != null && scaleTween.IsActive())
+        if (_woobleTween != null && _scaleTween.IsActive())
         {
-            strechTween.Kill();
+            _strechTween.Kill();
         }
-        woobleTween = ballRenderer.transform.DOShakeScale(0.4f, 1, 20, 90, true).OnComplete(()=> {
+        _woobleTween = ballRenderer.transform.DOShakeScale(0.4f, 1, 20, 90, true).OnComplete(()=> {
 
             ballRenderer.transform.DOScale(Vector3.one, 0.1f);
         });
     }
-    private void HiglightBall(){
-        if (colorTween != null && scaleTween.IsActive())
+    private void HighlightBall(){
+        if (_colorTween != null && _scaleTween.IsActive())
         {
-            colorTween.Kill();
+            _colorTween.Kill();
         }
-        colorTween =ballRenderer.GetComponent<SpriteRenderer>().DOColor(Color.white, 0.1f).OnComplete(()=>
+        GetComponent<TrailRenderer>().startColor = Color.white;
+        GetComponent<TrailRenderer>().endColor = Color.white;
+
+        _colorTween =ballRenderer.GetComponent<SpriteRenderer>().DOColor(Color.white, 0.1f).OnComplete(()=>
         { 
+            GetComponent<TrailRenderer>().startColor = new Color(1f, 0.56f, 0f);
+            GetComponent<TrailRenderer>().endColor = new Color(1f, 0.56f, 0f);
+    
             ballRenderer.GetComponent<SpriteRenderer>().DOColor(_orginalColor,0.2f);    
         });
-
+        
     }
 
     private void ScreenShake(){ }
@@ -98,10 +115,10 @@ public class BallScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        ballCollision.Invoke();
         //FaceVelocity();FaceVelocity Called in update 
         //WobbleBall(); Wobble process Starts end of the ScaleObject animation
         ScaleObject();
-        HiglightBall();
+        HighlightBall();
+        ballCollision?.Invoke(this,EventArgs.Empty);
     }
 }

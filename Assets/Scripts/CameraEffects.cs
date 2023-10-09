@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +10,20 @@ public class CameraEffects : MonoBehaviour
     [SerializeField] float strenght;
     
     [SerializeField] float duration;
+    private Vector3 _originalPosition;
 
-
-    public void ScreenShake( )
+    private void Start()
     {
-        transform.DOShakePosition(duration, strenght);
-        transform.DOShakePosition(duration, strenght);
-
+        _originalPosition = transform.position;
+        BallScript.instance.ballCollision += ScreenShake;
     }
+
+    private void ScreenShake(object sender, EventArgs e)
+    {
+        transform.DOShakePosition(duration, strenght).OnComplete(()=>transform.position=_originalPosition);
+        
+    }
+
+    
 
 }
