@@ -1710,17 +1710,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8665909191217052478, guid: de941534356f20040be32be0621fc920, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9099278299636224709, guid: de941534356f20040be32be0621fc920, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9099278299636224709, guid: de941534356f20040be32be0621fc920, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 9099278299636224709, guid: de941534356f20040be32be0621fc920, type: 3}
       propertyPath: m_LocalPosition.z

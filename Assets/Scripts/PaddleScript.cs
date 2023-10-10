@@ -2,13 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PaddleScript : MonoBehaviour
 {
     [SerializeField] private float maxPosx;
     [SerializeField] float maxBounceAngle;
     [SerializeField] private ParticleSystem confetiParticle;
+    [SerializeField] private GameObject mouth;
+
     private Camera _mainCamera;
+    
+    
+    private Tweener _mouthTween;
 
     private void Start()
     {
@@ -52,12 +58,25 @@ public class PaddleScript : MonoBehaviour
         confetiParticle.transform.position = collision.GetContact(0).point;
         confetiParticle.Play();
     }
+    private void makeMouthSmile()
+    {
+        if (_mouthTween != null && _mouthTween.IsActive())
+        {
+            _mouthTween.Kill();
+        }
+        _mouthTween=mouth.transform.DOScaleY(1, 0.2f).OnComplete(() =>
+        {
+            _mouthTween=mouth.transform.DOScaleY(-1, 8);
+        });
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Ball"))
         {
             return;
         }
+        makeMouthSmile();
+
         playConfeti(collision);
         HandleBallBounce(collision);
     }

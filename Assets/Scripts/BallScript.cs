@@ -17,6 +17,7 @@ public class BallScript : MonoBehaviour
     [SerializeField] private float speed=10; // Ball speed.
     [SerializeField] GameObject ballRenderer; // Ball sprite rendered as a child.
     [SerializeField] private GameObject smokeParticle;
+    
     private Rigidbody2D _rb;
     private Vector3 _originalScale;
     private Color _orginalColor;
@@ -26,7 +27,6 @@ public class BallScript : MonoBehaviour
     private Tweener _strechTween;
     private Tweener _woobleTween;
     private Tweener _colorTween;
-
     private void Awake()
     {
          Instance = this;
@@ -116,6 +116,7 @@ public class BallScript : MonoBehaviour
         
     }
 
+   
     private void PlantParticle(Collision2D collision)
     {
         // I want to face particle to the collision point.
