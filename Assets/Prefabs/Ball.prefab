@@ -163,9 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de356995a6325784badc72e15b60fde2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 0
-  startSpeed: 20
+  speed: 10
   ballRenderer: {fileID: 6434431868594362436}
+  smokeParticle: {fileID: 39710292184106937, guid: 17b86031bd8315b439f328c019ebda32, type: 3}
 --- !u!96 &1050968588219974074
 TrailRenderer:
   serializedVersion: 3

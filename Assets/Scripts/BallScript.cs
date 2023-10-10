@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -15,7 +16,7 @@ public class BallScript : MonoBehaviour
     
     [SerializeField] private float speed=10; // Ball speed.
     [SerializeField] GameObject ballRenderer; // Ball sprite rendered as a child.
-
+    [SerializeField] private GameObject smokeParticle;
     private Rigidbody2D _rb;
     private Vector3 _originalScale;
     private Color _orginalColor;
@@ -115,14 +116,19 @@ public class BallScript : MonoBehaviour
         
     }
 
-    
+    private void PlantParticle(Collision2D collision)
+    {
+        // I want to face particle to the collision point.
+        Transform particle =Instantiate(smokeParticle.transform, collision.GetContact(0).point, quaternion.identity);
+        particle.LookAt(transform);
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //FaceVelocity(); FaceVelocity Called in update 
         //WobbleBall(); Wobble process Starts end of the ScaleObject animation
         ScaleObject();
         HighlightBall();
-        
+        PlantParticle(collision);
         BallCollision?.Invoke(this,EventArgs.Empty); 
     }
 }

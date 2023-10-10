@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1369fb6cad31b0d4b8880aabc12ed72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strenght: 0.15
+  strength: 0
   duration: 0.3
 --- !u!4 &590547885 stripped
 Transform:
@@ -1709,6 +1709,10 @@ PrefabInstance:
     - target: {fileID: 5366515977171596820, guid: de941534356f20040be32be0621fc920, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8665909191217052478, guid: de941534356f20040be32be0621fc920, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9099278299636224709, guid: de941534356f20040be32be0621fc920, type: 3}
       propertyPath: m_LocalPosition.x

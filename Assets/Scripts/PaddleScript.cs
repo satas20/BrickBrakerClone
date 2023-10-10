@@ -7,7 +7,7 @@ public class PaddleScript : MonoBehaviour
 {
     [SerializeField] private float maxPosx;
     [SerializeField] float maxBounceAngle;
-    
+    [SerializeField] private ParticleSystem confetiParticle;
     private Camera _mainCamera;
 
     private void Start()
@@ -47,13 +47,18 @@ public class PaddleScript : MonoBehaviour
         ball.velocity = ballDirection * ball.velocity.magnitude;
     }
 
+    private void playConfeti(Collision2D collision)
+    {
+        confetiParticle.transform.position = collision.GetContact(0).point;
+        confetiParticle.Play();
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Ball"))
         {
             return;
         }
-
+        playConfeti(collision);
         HandleBallBounce(collision);
     }
 
