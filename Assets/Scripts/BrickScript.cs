@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 public class BrickScript : MonoBehaviour
 {
+    [SerializeField]private int health;
     //Brick variables.
-    private int _health;
     private Vector3 _originalScale;
     private Vector3 _originalPosition;
     
@@ -33,8 +34,8 @@ public class BrickScript : MonoBehaviour
     //Reduces the health of the brick and calls BrakeBrick it if health is 0.
     private void Hit(Collision2D collision)
     {
-        _health--;
-        if (_health == 0){
+        health--;
+        if (health == 0){
             BrickBreak( collision);
         }    
     
