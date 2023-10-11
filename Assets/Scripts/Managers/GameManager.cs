@@ -39,7 +39,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             DOTween.KillAll();
-            SceneManager.LoadScene("Level1");
+            string currentScene = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(currentScene);
 
         }
         if (brickCount == 0){ 
