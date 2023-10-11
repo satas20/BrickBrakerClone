@@ -16,14 +16,15 @@ You can adjust the balls bounce from the paddle  according to the touch point of
 
 ## Preview
 ### [For More Gameplay](https://www.youtube.com/watch?v=CBB1MukpNeI)
-<p align="center" >
-  <img src="Media/SS2.jpg" width="500" >
-  <img src="Media/SS1.jpg" width="500" >
+
+<p align="center">
+  <img src="Media/SS2.jpg" width= "350">
+  <img src="Media/SS1.jpg" width= "350">
 
 </p>
 <p align="center">
-  <img src="Media/Gif1.gif" width="500">
-  <img src="Media/Gif2.gif" width="500">
+  <img src="Media/Gif1.gif" width="350">
+  <img src="Media/Gif2.gif" width="350">
 </p>
 
   
