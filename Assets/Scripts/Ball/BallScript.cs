@@ -61,7 +61,7 @@ public class BallScript : MonoBehaviour
                 break;
             case GameManager.GameState.Win :
                 ballRenderer.SetActive(false);
-                speed = 0.001f;
+                speed = 50;
                 ScaleObject();
                 winParticle.Play();
                 break;
@@ -177,7 +177,7 @@ public class BallScript : MonoBehaviour
         ScaleObject();
         HighlightBall();
         PlantParticle(collision);
-        if (collision.gameObject.CompareTag("GameOver"))
+        if (collision.gameObject.CompareTag("GameOver")&&GameManager.Instance.currentState==GameManager.GameState.Playing)
         {
             GameManager.Instance.UpdateGameState(GameManager.GameState.GameOver);
             return;

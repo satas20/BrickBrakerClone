@@ -35,7 +35,7 @@ public class BallAudioManager : MonoBehaviour
         timer = 0;
         _audioSource.PlayOneShot(plingSounds[comboCount]);
         
-        if(comboCount<plingSounds.Length)
+        if(comboCount<plingSounds.Length-1)
             comboCount++;
         
     }
