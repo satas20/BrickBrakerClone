@@ -15,7 +15,7 @@ You can adjust the balls bounce from the paddle  according to the touch point of
 - 2022.3.5f1
 
 ## Preview
-### [For More Gameplay](https://www.youtube.com/watch?v=CBB1MukpNeI)
+### [For More Gameplay](https://youtu.be/h0dxdUsrg9E)
 
 <p align="center">
   <img src="Media/SS2.jpg" width= "350">
