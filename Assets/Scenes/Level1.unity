@@ -272,7 +272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &270585311
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1306,7 +1306,7 @@ GameObject:
   - component: {fileID: 1097822536}
   - component: {fileID: 1097822535}
   - component: {fileID: 1097822537}
-  - component: {fileID: 1097822538}
+  - component: {fileID: 1097822539}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1461,7 +1461,7 @@ MonoBehaviour:
   - {fileID: 781427203}
   - {fileID: 756026531}
   brickCount: 0
---- !u!114 &1097822538
+--- !u!114 &1097822539
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1097822534}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 203f0256d942a2d40ae8446953240157, type: 3}
+  m_Script: {fileID: 11500000, guid: 1edf2c989f7327f4bb574a564598ac35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverPanel: {fileID: 1802225668}
@@ -2438,7 +2438,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1662791048
 RectTransform:
   m_ObjectHideFlags: 0

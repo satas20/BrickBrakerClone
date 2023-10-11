@@ -22,6 +22,7 @@ public class CameraEffects : MonoBehaviour
         
         //Subscribing to ballCollision  event.
         BallScript.Instance.BallCollision += ScreenShake; 
+        //transform.DOJump( new Vector3(0,3.75f,-10),1 ,1,0.5f).SetEase(Ease.InBack);
     }
 
     //Shakes the camera.
