@@ -12,12 +12,13 @@ public class PaddleScript : MonoBehaviour
     [SerializeField] private GameObject mouth;
 
     private Camera _mainCamera;
-    
+    private AudioSource _audioSource;
     
     private Tweener _mouthTween;
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _mainCamera = Camera.main;
     }
 
@@ -76,7 +77,7 @@ public class PaddleScript : MonoBehaviour
             return;
         }
         makeMouthSmile();
-
+        _audioSource.Play();
         playConfeti(collision);
         HandleBallBounce(collision);
     }

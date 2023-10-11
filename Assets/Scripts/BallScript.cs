@@ -5,6 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -125,6 +126,14 @@ public class BallScript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.CompareTag("Brick"))
+        {
+            GetComponent<BallAudioManager>().PlayPling();
+        }
+        else
+        {
+            GetComponent<BallAudioManager>().PlayBallWall();
+        }
         //FaceVelocity(); FaceVelocity Called in update 
         //WobbleBall(); Wobble process Starts end of the ScaleObject animation
         ScaleObject();
