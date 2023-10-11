@@ -18,7 +18,9 @@ public class BallScript : MonoBehaviour
     [SerializeField] private float speed=10; // Ball speed.
     [SerializeField] GameObject ballRenderer; // Ball sprite rendered as a child.
     [SerializeField] private GameObject smokeParticle;
-    
+    [SerializeField] private ParticleSystem winParticle;
+    [SerializeField] private ParticleSystem loseParticle;
+
     private Rigidbody2D _rb;
     private Vector3 _originalScale;
     private Color _orginalColor;
@@ -28,18 +30,54 @@ public class BallScript : MonoBehaviour
     private Tweener _strechTween;
     private Tweener _woobleTween;
     private Tweener _colorTween;
+    private TrailRenderer _trailRenderer;
+
     private void Awake()
     {
          Instance = this;
+         GameManager.OnGameStateChanged+=GameManager_OnGameStateChanged;
+
+    }
+    
+    private void GameManager_OnGameStateChanged(GameManager.GameState state)
+    {
+        switch (state)
+        {
+            case GameManager.GameState.Waiting:
+             
+                break;
+            case GameManager.GameState.Playing:
+              Invoke(nameof(SetRandomTrajectory), 1);
+              speed = 10;
+                break;
+            case GameManager.GameState.GameOver:
+                loseParticle.Play();
+                speed = 0;
+                break;
+            case GameManager.GameState.Paused:
+                speed = 0;
+                WobbleBall();
+                HighlightBall();
+                break;
+            case GameManager.GameState.Win :
+                ballRenderer.SetActive(false);
+                speed = 0.001f;
+                ScaleObject();
+                winParticle.Play();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(state), state, null);
+        }
     }
 
     void Start()
     {
+        _trailRenderer = GetComponent<TrailRenderer>();
         //Setting values.
         _orginalColor = ballRenderer.GetComponent<SpriteRenderer>().color;
         _originalScale = transform.localScale;
         _rb = GetComponent<Rigidbody2D>();
-        Invoke(nameof(SetRandomTrajectory), 1);
+        //Invoke(nameof(SetRandomTrajectory), 1);
     }
 
    
@@ -104,13 +142,13 @@ public class BallScript : MonoBehaviour
         {
             _colorTween.Kill();
         }
-        GetComponent<TrailRenderer>().startColor = Color.white;
-        GetComponent<TrailRenderer>().endColor = Color.white;
+        _trailRenderer.startColor = Color.white;
+        _trailRenderer.endColor = Color.white;
 
         _colorTween =ballRenderer.GetComponent<SpriteRenderer>().DOColor(Color.white, 0.1f).OnComplete(()=>
         { 
-            GetComponent<TrailRenderer>().startColor = new Color(1f, 0.56f, 0f);
-            GetComponent<TrailRenderer>().endColor = new Color(1f, 0.56f, 0f);
+            _trailRenderer.startColor = new Color(1f, 0.56f, 0f);
+            _trailRenderer.endColor = new Color(1f, 0.56f, 0f);
     
             ballRenderer.GetComponent<SpriteRenderer>().DOColor(_orginalColor,0.2f);    
         });
@@ -139,6 +177,15 @@ public class BallScript : MonoBehaviour
         ScaleObject();
         HighlightBall();
         PlantParticle(collision);
+        if (collision.gameObject.CompareTag("GameOver"))
+        {
+            GameManager.Instance.UpdateGameState(GameManager.GameState.GameOver);
+            return;
+        }
         BallCollision?.Invoke(this,EventArgs.Empty); 
+    }
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged-=GameManager_OnGameStateChanged;
     }
 }

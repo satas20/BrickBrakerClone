@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ball
   - Brick
+  - GameOver
   layers:
   - Default
   - TransparentFX

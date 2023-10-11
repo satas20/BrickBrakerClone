@@ -34,7 +34,9 @@ public class BallAudioManager : MonoBehaviour
     {
         timer = 0;
         _audioSource.PlayOneShot(plingSounds[comboCount]);
-        comboCount++;
+        
+        if(comboCount<plingSounds.Length)
+            comboCount++;
         
     }
     //Plays the ball wall sound.

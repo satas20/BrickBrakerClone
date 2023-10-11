@@ -91,7 +91,9 @@ public class BrickScript : MonoBehaviour
     }
     
     //Kills the animations, calls the Bricks braking animations and destroys when completed.
-    private void BrickBreak(Collision2D collision2D){
+    private void BrickBreak(Collision2D collision2D)
+    {
+        GameManager.Instance.brickCount--;
         BallScript.Instance.BallCollision -= BrickShake;
         BallScript.Instance.BallCollision -= BrickJump;
         _shakeTween.Kill();

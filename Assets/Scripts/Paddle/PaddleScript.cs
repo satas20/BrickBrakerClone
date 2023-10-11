@@ -26,7 +26,11 @@ public class PaddleScript : MonoBehaviour
 
     private void Update()
     {
-        HandleMovement();
+       
+        if (GameManager.Instance.currentState == GameManager.GameState.Playing)
+        {
+            HandleMovement();
+        }
     }
 
     // Moves the paddle to the mouse  x position.
@@ -55,12 +59,14 @@ public class PaddleScript : MonoBehaviour
         // Re-apply the new direction to the ball
         ball.velocity = ballDirection * ball.velocity.magnitude;
     }
+    
     //plays the confeti particle system at the collision point.
     private void playConfeti(Collision2D collision)
     {
         confetiParticle.transform.position = collision.GetContact(0).point;
         confetiParticle.Play();
     }
+    
     //Makes the mouth smile using scaleY.
     private void makeMouthSmile()
     {
