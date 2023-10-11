@@ -6,8 +6,10 @@ using DG.Tweening;
 
 public class PaddleScript : MonoBehaviour
 {
+    //clamping values for the paddle.
     [SerializeField] private float maxPosx;
     [SerializeField] float maxBounceAngle;
+    //Effect objects.
     [SerializeField] private ParticleSystem confetiParticle;
     [SerializeField] private GameObject mouth;
 
@@ -22,7 +24,7 @@ public class PaddleScript : MonoBehaviour
         _mainCamera = Camera.main;
     }
 
-    void Update()
+    private void Update()
     {
         HandleMovement();
     }
@@ -53,12 +55,13 @@ public class PaddleScript : MonoBehaviour
         // Re-apply the new direction to the ball
         ball.velocity = ballDirection * ball.velocity.magnitude;
     }
-
+    //plays the confeti particle system at the collision point.
     private void playConfeti(Collision2D collision)
     {
         confetiParticle.transform.position = collision.GetContact(0).point;
         confetiParticle.Play();
     }
+    //Makes the mouth smile using scaleY.
     private void makeMouthSmile()
     {
         if (_mouthTween != null && _mouthTween.IsActive())

@@ -117,7 +117,7 @@ public class BallScript : MonoBehaviour
         
     }
 
-   
+   //Creating particle and facing it to the ball.
     private void PlantParticle(Collision2D collision)
     {
         // I want to face particle to the collision point.
