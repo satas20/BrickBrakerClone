@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.Mathematics;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
@@ -11,8 +13,14 @@ public class GameManager : MonoBehaviour
     static public GameManager Instance;
     public GameState currentState;
     public static event Action<GameState> OnGameStateChanged;
-    [SerializeField] private GameObject[] bricks;
-    public int brickCount;
+    public List<GameObject> bricks;
+    public List<GameObject> balls;
+
+    [Header("PowerUps")] 
+    [SerializeField] private GameObject[] powerUpPrefs;
+    [SerializeField] private int[] probabilites;
+    
+    
     public enum GameState
     {
         Waiting,
@@ -25,11 +33,11 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        bricks = new List<GameObject>();
     }
 
     private void Start()
     {
-        brickCount= bricks.Length;
         UpdateGameState(GameState.Waiting);
     }
 
@@ -43,7 +51,7 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(currentScene);
 
         }
-        if (brickCount == 0){ 
+        if (bricks.Count == 0){ 
             UpdateGameState(GameState.Win);
             return; 
         }
@@ -62,6 +70,16 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void SpawnPowerUp(Vector3 target)
+    {
+        int random1 = Random.Range(0, powerUpPrefs.Length);
+        int random2=  Random.Range(0, 100);
+
+        if (random2 < probabilites[random1])
+        {
+            Instantiate(powerUpPrefs[random1],target,quaternion.identity);
+        }
+    }
     public void UpdateGameState(GameState nextState)
     {
         Debug.Log("current state : "+ nextState.ToString());
@@ -92,12 +110,12 @@ public class GameManager : MonoBehaviour
 
     private void HandleWaiting()
     {
-        
+        StopCoroutine(WaveManager.Instance.MoveDown());
         
     }
     private void HandlePlaying()
     {
-        
+        StartCoroutine(WaveManager.Instance.MoveDown());
     }
     private void HandleGameOver()
     {

@@ -7,6 +7,12 @@ TagManager:
   - Ball
   - Brick
   - GameOver
+  - BallAddPowerUp
+  - PaddleExtendPowerUp
+  - NoLoosePowerUp
+  - SlowMoPowerUp
+  - BallMultiplyPowerUp
+  - Paddle
   layers:
   - Default
   - TransparentFX

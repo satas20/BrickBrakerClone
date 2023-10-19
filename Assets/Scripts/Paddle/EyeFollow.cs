@@ -11,7 +11,8 @@ public class EyeFollow : MonoBehaviour
     
     //Makes the eye follow the ball calculating the direction vector.
     private void FollowTarget(){
-        Vector3 ball = BallScript.Instance.transform.position;
+        if(GameManager.Instance.balls.Count==0) return;
+        Vector3 ball = GameManager.Instance.balls[0].transform.position;
             
         Vector2 direction = new Vector2(
             (ball.x - transform.position.x),

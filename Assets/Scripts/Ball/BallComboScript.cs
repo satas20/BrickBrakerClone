@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallAudioManager : MonoBehaviour
+public class BallComboScript : MonoBehaviour
 {
-    private AudioSource _audioSource;
+    private AudioManager _audioManager;
     //Audio clips
     [SerializeField] private AudioClip[] plingSounds;
     [SerializeField] private AudioClip  ballWall;
@@ -15,7 +15,7 @@ public class BallAudioManager : MonoBehaviour
     
     private void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
+        _audioManager= AudioManager.Instance;
     }
     
 
@@ -33,15 +33,11 @@ public class BallAudioManager : MonoBehaviour
     public void PlayPling()
     {
         timer = 0;
-        _audioSource.PlayOneShot(plingSounds[comboCount]);
-        
+        //_audioSource.PlayOneShot(plingSounds[comboCount]);
+        _audioManager.PlayComboSound(comboCount);
         if(comboCount<plingSounds.Length-1)
             comboCount++;
         
     }
-    //Plays the ball wall sound.
-    public void PlayBallWall()
-    {
-        _audioSource.PlayOneShot(ballWall);
-    }
+    
 }

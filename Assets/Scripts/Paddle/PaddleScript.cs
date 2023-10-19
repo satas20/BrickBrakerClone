@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEditor;
 
 public class PaddleScript : MonoBehaviour
 {
@@ -14,14 +15,13 @@ public class PaddleScript : MonoBehaviour
     [SerializeField] private GameObject mouth;
 
     private Camera _mainCamera;
-    private AudioSource _audioSource;
-    
+    private Vector2 _screenBounds;
     private Tweener _mouthTween;
 
     private void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
         _mainCamera = Camera.main;
+        _screenBounds = _mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, _mainCamera.transform.position.z));
     }
 
     private void Update()
@@ -32,14 +32,16 @@ public class PaddleScript : MonoBehaviour
             HandleMovement();
         }
     }
-
+   
+    # region Effects
     // Moves the paddle to the mouse  x position.
     private void HandleMovement() 
     {
         float padPos= _mainCamera.ScreenToWorldPoint(Input.mousePosition).x; // taking mouse position according to camera.
         
+        
         // Assigning and clamping the paddle position according to the screen size.
-        transform.position = new Vector2(Mathf.Clamp(padPos,-maxPosx,maxPosx),transform.position.y) ; 
+        transform.position = new Vector2(Mathf.Clamp(padPos,-_screenBounds.x + transform.localScale.x/1.5f,_screenBounds.x-transform.localScale.x/1.5f),transform.position.y) ; 
     }
    
     //Bending the ball angle according to the landing position on the paddle using rigidbody of the ball.
@@ -79,6 +81,7 @@ public class PaddleScript : MonoBehaviour
             _mouthTween=mouth.transform.DOScaleY(-1, 8);
         });
     }
+    # endregion
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Ball"))
@@ -86,9 +89,28 @@ public class PaddleScript : MonoBehaviour
             return;
         }
         makeMouthSmile();
-        _audioSource.Play();
+        AudioManager.Instance.PlayBallPaddle();
         playConfeti(collision);
         HandleBallBounce(collision);
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "BallAddPowerUp":
+                
+                break;
+            case "BallMultiplyPowerUp":
+                break;
+            case "PaddleExtendPowerUp":
+                break;
+            case "NoLoosePowerUp":
+                break;
+            case "SlowMoPowerUp":
+                break;
+            
+                
+        }
+    }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
@@ -21,7 +22,7 @@ public class CameraEffects : MonoBehaviour
         _originalPosition = transform.position;
         
         //Subscribing to ballCollision  event.
-        BallScript.Instance.BallCollision += ScreenShake; 
+        EventManager.Instance.BallCollision += ScreenShake; 
         //transform.DOJump( new Vector3(0,3.75f,-10),1 ,1,0.5f).SetEase(Ease.InBack);
     }
 
@@ -32,6 +33,8 @@ public class CameraEffects : MonoBehaviour
         
     }
 
-    
-
+    private void OnDestroy()
+    {
+        EventManager.Instance.BallCollision -= ScreenShake;
+    }
 }
