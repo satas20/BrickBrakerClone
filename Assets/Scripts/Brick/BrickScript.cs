@@ -27,7 +27,11 @@ public class BrickScript : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.down*Time.deltaTime,Space.World);
+        if (GameManager.Instance.currentState == GameManager.GameState.Playing)
+        {
+            transform.Translate(Vector3.down*Time.deltaTime,Space.World);
+        }
+    
     }
 
     //Reduces the health of the brick and calls BrakeBrick it if health is 0.

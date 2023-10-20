@@ -110,12 +110,10 @@ public class GameManager : MonoBehaviour
 
     private void HandleWaiting()
     {
-        StopCoroutine(WaveManager.Instance.MoveDown());
         
     }
     private void HandlePlaying()
     {
-        StartCoroutine(WaveManager.Instance.MoveDown());
     }
     private void HandleGameOver()
     {

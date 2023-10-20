@@ -30,7 +30,7 @@ public class BrickAnims : MonoBehaviour
         EventManager.Instance.BallCollision += BrickJump;
 
 
-        EventManager.Instance.WaveMove += KillTweens;
+        //EventManager.Instance.WaveMove += KillTweens;
 
     }
 
@@ -54,7 +54,7 @@ public class BrickAnims : MonoBehaviour
         EventManager.Instance.BallCollision -= BrickJump;
         
         
-        EventManager.Instance.WaveMove -= KillTweens;
+        //EventManager.Instance.WaveMove -= KillTweens;
         
     }
     

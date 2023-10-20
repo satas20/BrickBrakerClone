@@ -19,20 +19,5 @@ public class WaveManager : MonoBehaviour
         //StartCoroutine(MoveDown());
     }
 
-    public IEnumerator MoveDown()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(downDuration);
-            EventManager.Instance.InvokeWaveMove();
-            foreach (GameObject brick in GameManager.Instance.bricks)
-            {
-                brick.transform.DOLocalMoveY(brick.transform.localPosition.y - 1.5f, 0.6f, false).SetEase(Ease.InOutQuad);
-            }
-            
-            
-            
-            
-        }
-    }
+   
 }
