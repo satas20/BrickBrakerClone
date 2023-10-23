@@ -4,16 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEditor;
+using UnityEngine.Serialization;
 
 public class PaddleScript : MonoBehaviour
 {
+    public int health=3;
+
+    private bool _isInvicible=false;
+
+    [FormerlySerializedAs("renderer")] [SerializeField] private GameObject spriteRenderer;
     //clamping values for the paddle.
     [SerializeField] private float maxPosx;
     [SerializeField] float maxBounceAngle;
     //Effect objects.
     [SerializeField] private ParticleSystem confetiParticle;
     [SerializeField] private GameObject mouth;
-
+    
+    
     private Camera _mainCamera;
     private Vector2 _screenBounds;
     private Tweener _mouthTween;
@@ -32,8 +39,7 @@ public class PaddleScript : MonoBehaviour
             HandleMovement();
         }
     }
-   
-    # region Effects
+    
     // Moves the paddle to the mouse  x position.
     private void HandleMovement() 
     {
@@ -43,7 +49,21 @@ public class PaddleScript : MonoBehaviour
         // Assigning and clamping the paddle position according to the screen size.
         transform.position = new Vector2(Mathf.Clamp(padPos,-_screenBounds.x + transform.localScale.x/1.5f,_screenBounds.x-transform.localScale.x/1.5f),transform.position.y) ; 
     }
-   
+
+    public void GetHit()
+    {
+        if(_isInvicible)
+            return;
+        _isInvicible = true;
+        health--;
+        ShakePaddle();
+        StartCoroutine(FlashAfterDamage());
+        EventManager.Instance.InvokePaddleHit();
+        if (health == 0)
+        {
+            GameManager.Instance.UpdateGameState(GameManager.GameState.GameOver);
+        }
+    }
     //Bending the ball angle according to the landing position on the paddle using rigidbody of the ball.
     private void HandleBallBounce(Collision2D collision)
     {
@@ -61,7 +81,27 @@ public class PaddleScript : MonoBehaviour
         // Re-apply the new direction to the ball
         ball.velocity = ballDirection * ball.velocity.magnitude;
     }
-    
+    # region Effects
+
+    private IEnumerator FlashAfterDamage()
+    {
+        float flashDelay = 0.01f;
+        SpriteRenderer spriteRenderer = this.spriteRenderer.GetComponent<SpriteRenderer>();
+        
+        for (int i = 0; i < 10; i++)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(flashDelay);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(flashDelay);
+        }
+
+        _isInvicible = false;
+    }
+    private void ShakePaddle()
+    {
+        spriteRenderer.transform.DOShakeScale(0.2f, 1f, 20, 90, true);
+    }
     //plays the confeti particle system at the collision point.
     private void playConfeti(Collision2D collision)
     {
@@ -99,7 +139,6 @@ public class PaddleScript : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "BallAddPowerUp":
-                
                 break;
             case "BallMultiplyPowerUp":
                 break;

@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
-
+using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     //Uı Panels
@@ -11,11 +13,27 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject tapToStartPanel;
     [SerializeField] private GameObject winPanel;
+    [SerializeField] private TextMeshProUGUI paddleHealth;
 
-
+    private PaddleScript paddle;
     private void Awake()
     {
         GameManager.OnGameStateChanged+=GameManager_OnGameStateChanged;
+     
+       
+    }
+
+    private void Start()
+    {
+        EventManager.Instance.PaddleHit+=UpdatePaddleHealth;  
+
+        UpdatePaddleHealth(this, EventArgs.Empty);
+    }
+
+    private void UpdatePaddleHealth(object sender, EventArgs e)
+    {
+        paddle=FindObjectOfType<PaddleScript>(); 
+        paddleHealth.text ="X "+ paddle.health.ToString();    
     }
 
     //Setting panels active according to game state.
@@ -65,8 +83,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-   
-
+    
     private void OnDestroy()
     {
         GameManager.OnGameStateChanged-=GameManager_OnGameStateChanged;

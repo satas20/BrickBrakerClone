@@ -7,6 +7,7 @@ public class EventManager : MonoBehaviour
     public static EventManager Instance;
     
     public event EventHandler BallCollision;
+    public event EventHandler PaddleHit;
     public event EventHandler WaveMove; 
     private void Awake()
     {
@@ -21,5 +22,9 @@ public class EventManager : MonoBehaviour
     public void InvokeBallCollision()
     {
         BallCollision?.Invoke(this, EventArgs.Empty);
+    }
+    public void InvokePaddleHit()
+    {
+        PaddleHit?.Invoke(this, EventArgs.Empty);
     }
 }

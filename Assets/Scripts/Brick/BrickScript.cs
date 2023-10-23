@@ -72,5 +72,11 @@ public class BrickScript : MonoBehaviour
         {
             Hit(other);
         }
+
+        if (other.gameObject.CompareTag("Paddle"))
+        {
+            Hit(other);
+            other.gameObject.GetComponent<PaddleScript>().GetHit();
+        }
     }
 }
