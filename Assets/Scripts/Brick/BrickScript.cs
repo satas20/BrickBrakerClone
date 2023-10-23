@@ -58,7 +58,7 @@ public class BrickScript : MonoBehaviour
         _brickRenderer.DarkenBrick();
         
         
-        transform.DOScale(0,1).OnComplete(()=>
+        transform.DOScale(0,0.5f).OnComplete(()=>
         {
             _brickRenderer.KillTweens();
             Destroy(gameObject);

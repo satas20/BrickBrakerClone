@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] bool isEndless;
     static public GameManager Instance;
     public GameState currentState;
     public static event Action<GameState> OnGameStateChanged;
@@ -19,8 +20,8 @@ public class GameManager : MonoBehaviour
     [Header("PowerUps")] 
     [SerializeField] private GameObject[] powerUpPrefs;
     [SerializeField] private int[] probabilites;
-    
-    
+
+
     public enum GameState
     {
         Waiting,
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(currentScene);
 
         }
-        if (bricks.Count == 0){ 
+        if (bricks.Count == 0 && !isEndless){ 
             UpdateGameState(GameState.Win);
             return; 
         }

@@ -91,7 +91,7 @@ public class BrickAnims : MonoBehaviour
     //Darkens the brick color to black.
     public void DarkenBrick()
     {
-        GetComponent<SpriteRenderer>().DOColor(Color.black, 0.85f);
+        GetComponent<SpriteRenderer>().DOColor(Color.black, 0.5f);
     }
     //Throws and rotates the brick in the direction of the ball using rigidbody physics collision point.
     public void ThrowBrick(Collision2D collision2D)
@@ -99,11 +99,11 @@ public class BrickAnims : MonoBehaviour
         
         Rigidbody2D rb = transform.parent.GetComponent<Rigidbody2D>();
         transform.parent.GetComponent<BoxCollider2D>().isTrigger = true;
-        rb.gravityScale = 2;
+        rb.gravityScale = 1;
         rb.isKinematic = false;
         Vector2 force = transform.parent.transform.position - collision2D.transform.position;
-        rb.AddForce(force.normalized * 5, ForceMode2D.Impulse);
-        rb.AddTorque(force.x, ForceMode2D.Impulse);
+        rb.AddForce(force.normalized * 8, ForceMode2D.Impulse);
+        rb.AddTorque(force.x*3, ForceMode2D.Impulse);
        
     }
     

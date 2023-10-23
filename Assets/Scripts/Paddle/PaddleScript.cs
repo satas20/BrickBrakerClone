@@ -9,6 +9,7 @@ using UnityEngine.Serialization;
 public class PaddleScript : MonoBehaviour
 {
     public int health=3;
+    public int laserCount=0;
 
     private bool _isInvicible=false;
 
@@ -129,7 +130,7 @@ public class PaddleScript : MonoBehaviour
             return;
         }
         makeMouthSmile();
-        AudioManager.Instance.PlayBallPaddle();
+        //AudioManager.Instance.PlayBallPaddle();
         playConfeti(collision);
         HandleBallBounce(collision);
     }
@@ -145,6 +146,16 @@ public class PaddleScript : MonoBehaviour
             case "PaddleExtendPowerUp":
                 break;
             case "NoLoosePowerUp":
+                break;
+            case "HealPowerUp":
+                health++;
+                EventManager.Instance.InvokePaddleHit();
+                Destroy(other.gameObject);
+                break;
+            case "LaserPowerUp":
+                
+                Destroy(other.gameObject);
+                laserCount++;
                 break;
             case "SlowMoPowerUp":
                 break;

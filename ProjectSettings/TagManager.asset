@@ -13,6 +13,8 @@ TagManager:
   - SlowMoPowerUp
   - BallMultiplyPowerUp
   - Paddle
+  - HealPowerUp
+  - LaserPowerUp
   layers:
   - Default
   - TransparentFX
