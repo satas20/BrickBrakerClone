@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine.Serialization;
 
@@ -20,7 +21,13 @@ public class PaddleScript : MonoBehaviour
     //Effect objects.
     [SerializeField] private ParticleSystem confetiParticle;
     [SerializeField] private GameObject mouth;
-    
+
+    //Laser variables.
+    private float _lastTapTime = 0;
+    private float doubleTapThreshhold = 0.2f;
+    [SerializeField] private GameObject laserPrefab;
+    [SerializeField] private float laserSpeed;
+    [SerializeField] private Vector3 laserOffset;
     
     private Camera _mainCamera;
     private Vector2 _screenBounds;
@@ -38,6 +45,7 @@ public class PaddleScript : MonoBehaviour
         if (GameManager.Instance.currentState == GameManager.GameState.Playing)
         {
             HandleMovement();
+            HandelDoubleTap();
         }
     }
     
@@ -51,6 +59,38 @@ public class PaddleScript : MonoBehaviour
         transform.position = new Vector2(Mathf.Clamp(padPos,-_screenBounds.x + transform.localScale.x/1.5f,_screenBounds.x-transform.localScale.x/1.5f),transform.position.y) ; 
     }
 
+    private void ShootLaser()
+    {
+        if(laserCount<=0){return;}
+
+        laserCount--;
+        GameObject laser=Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
+        laser.GetComponent<Rigidbody2D>().AddForce(Vector2.up*laserSpeed,ForceMode2D.Impulse);
+    }
+    
+    //Handles double Tap input
+    private void HandelDoubleTap()
+    {
+        if (Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+            if(touch.phase==TouchPhase.Began)
+            {
+                if (Time.time - _lastTapTime < doubleTapThreshhold)
+                {
+                    ShootLaser();
+                    _lastTapTime = Time.time;
+                }
+                else
+                {
+                    _lastTapTime = Time.time;
+                }
+            }
+        }
+        
+    }
+    
+    //Geting hit by bricks.
     public void GetHit()
     {
         if(_isInvicible)
@@ -80,6 +120,8 @@ public class PaddleScript : MonoBehaviour
         float bounceAngle = (contactDistance.x / paddle.bounds.size.x) * maxBounceAngle;
         ballDirection = Quaternion.AngleAxis(bounceAngle, Vector3.forward) * ballDirection;
         // Re-apply the new direction to the ball
+        if(ballDirection.y<0)
+            return;
         ball.velocity = ballDirection * ball.velocity.magnitude;
     }
     # region Effects

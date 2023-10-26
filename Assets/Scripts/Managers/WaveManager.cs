@@ -12,7 +12,10 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float downDuration;
 
     [SerializeField] Transform spawnPoint;
-    [SerializeField] private List<GameObject> wavePrefabs;
+    [SerializeField] private List<GameObject> wavePrefabs1;
+    [SerializeField] private List<GameObject> wavePrefabs2;
+    [SerializeField] private List<GameObject> wavePrefabs3;
+    public int waveNum=1; 
     private void Awake()
     {
         Instance= this;
@@ -27,8 +30,19 @@ public class WaveManager : MonoBehaviour
     {
         while (true)
         {
-            
-            Instantiate(wavePrefabs[ Random.Range(0, wavePrefabs.Count)], spawnPoint.position, Quaternion.identity);
+            switch (waveNum)
+            {
+                case 1:
+                    Instantiate(wavePrefabs1[ Random.Range(0, wavePrefabs1.Count)], spawnPoint.position, Quaternion.identity);
+                    break;
+                case 2:
+                    Instantiate(wavePrefabs2[ Random.Range(0, wavePrefabs2.Count)], spawnPoint.position, Quaternion.identity);
+                    break;
+                case 3:
+                    Instantiate(wavePrefabs3[ Random.Range(0, wavePrefabs3.Count)], spawnPoint.position, Quaternion.identity);
+                    break;
+            }
+
             yield return new WaitForSeconds(5f);
         }
         

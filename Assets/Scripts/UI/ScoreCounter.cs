@@ -17,6 +17,13 @@ public class ScoreCounter : MonoBehaviour
             score += Time.deltaTime;
             
         }
+
+        WaveManager.Instance.waveNum = score switch
+        {
+            < 20 => 1,
+            < 40 => 2,
+            _ => 3
+        };
         scoreText.text = score.ToString("0");
     }
 }

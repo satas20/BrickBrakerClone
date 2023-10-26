@@ -54,7 +54,8 @@ public class BrickScript : MonoBehaviour
         
         _brickRenderer.KillTweens();
         _brickRenderer.UnSub();
-        _brickRenderer.ThrowBrick(collision2D);
+        if(collision2D!=null)
+            _brickRenderer.ThrowBrick(collision2D);
         _brickRenderer.DarkenBrick();
         
         
@@ -75,8 +76,25 @@ public class BrickScript : MonoBehaviour
 
         if (other.gameObject.CompareTag("Paddle"))
         {
-            Hit(other);
+            BrickBreak(other);
             other.gameObject.GetComponent<PaddleScript>().GetHit();
         }
+
+        if (other.gameObject.CompareTag("GameOver"))
+        {
+            BrickBreak(null);
+        }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Laser"))
+        {
+            BrickBreak(null);
+            
+        }
+        
+    }
+
+   
 }
