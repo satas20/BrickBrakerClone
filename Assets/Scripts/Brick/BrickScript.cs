@@ -14,8 +14,8 @@ public class BrickScript : MonoBehaviour
     
 
     [SerializeField] private float downDuration;
-    [SerializeField]private BrickAnims _brickRenderer; 
-   
+    [SerializeField]private BrickAnims _brickRenderer;
+    [SerializeField] private bool isOnMenu=false;
     
     
     private void Start()
@@ -27,8 +27,10 @@ public class BrickScript : MonoBehaviour
 
     private void Update()
     {
+        
         if (GameManager.Instance.currentState == GameManager.GameState.Playing)
         {
+            if(isOnMenu){return;}
             transform.Translate(Vector3.down*Time.deltaTime,Space.World);
         }
     

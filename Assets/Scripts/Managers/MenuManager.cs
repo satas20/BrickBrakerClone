@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,14 +8,16 @@ public class MenuManager : MonoBehaviour
 {
     public void loadLevel1()
     {
+        Debug.Log("replay");
         SceneManager.LoadScene("Level1");
     }
-    public void loadLevel2()
+    public void loadMenu()
     {
-        SceneManager.LoadScene("Level2");
+        SceneManager.LoadScene("Menu");
     }
-    public void loadLevel3()
+    public void Quit()
     {
-        SceneManager.LoadScene("Level3");
+        Application.Quit();
     }
+    
 }
