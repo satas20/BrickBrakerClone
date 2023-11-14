@@ -64,6 +64,8 @@ public class PaddleScript : MonoBehaviour
         if(laserCount<=0){return;}
 
         laserCount--;
+        EventManager.Instance.InvokePaddleHit();
+
         GameObject laser=Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
         laser.GetComponent<Rigidbody2D>().AddForce(Vector2.up*laserSpeed,ForceMode2D.Impulse);
     }
@@ -96,6 +98,7 @@ public class PaddleScript : MonoBehaviour
         if(_isInvicible)
             return;
         _isInvicible = true;
+        AudioManager.Instance.PlayPaddleHit();
         health--;
         ShakePaddle();
         StartCoroutine(FlashAfterDamage());
@@ -179,6 +182,7 @@ public class PaddleScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
         switch (other.gameObject.tag)
         {
             case "BallAddPowerUp":
@@ -190,14 +194,19 @@ public class PaddleScript : MonoBehaviour
             case "NoLoosePowerUp":
                 break;
             case "HealPowerUp":
+                AudioManager.Instance.PlayPowerUp();
                 health++;
                 EventManager.Instance.InvokePaddleHit();
                 Destroy(other.gameObject);
                 break;
             case "LaserPowerUp":
                 
+                AudioManager.Instance.PlayPowerUp();
+                
                 Destroy(other.gameObject);
                 laserCount++;
+                EventManager.Instance.InvokePaddleHit();
+
                 break;
             case "SlowMoPowerUp":
                 break;

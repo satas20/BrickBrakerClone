@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject tapToStartPanel;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private TextMeshProUGUI paddleHealth;
+    [SerializeField] private TextMeshProUGUI laserCount;
 
     private PaddleScript paddle;
     private void Awake()
@@ -26,22 +27,26 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         EventManager.Instance.PaddleHit+=UpdatePaddleHealth;  
-
+        
         UpdatePaddleHealth(this, EventArgs.Empty);
     }
 
     private void UpdatePaddleHealth(object sender, EventArgs e)
     {
+        
         paddle=FindObjectOfType<PaddleScript>(); 
-        paddleHealth.text ="X "+ paddle.health.ToString();    
+        laserCount.text = paddle.laserCount.ToString();
+        paddleHealth.text = paddle.health.ToString();    
     }
 
     //Setting panels active according to game state.
     private void GameManager_OnGameStateChanged(GameManager.GameState state)
     {
+        if(tapToStartPanel==null){return;}
         switch (state)
         {
             case GameManager.GameState.Waiting:
+                
                 tapToStartPanel.transform.DOShakePosition(10, 10, 10, 10, false, true);
                 gameOverPanel.SetActive(false);
                 pausePanel.SetActive(false);
@@ -49,6 +54,7 @@ public class UIManager : MonoBehaviour
                 winPanel.SetActive(false);
                 break;
             case GameManager.GameState.Playing:
+                
                 gameOverPanel.SetActive(false);
                 pausePanel.SetActive(false);
                 tapToStartPanel.SetActive(false);

@@ -9,6 +9,8 @@ public class SlowMoPowerUp : MonoBehaviour
 
     IEnumerator PickUp(Collider2D other)
     {
+        AudioManager.Instance.PlayPowerUp();
+
         Time.timeScale = 0.5f;
         Time.fixedDeltaTime  = Time.timeScale * 0.01f;
         renderer.enabled = false;

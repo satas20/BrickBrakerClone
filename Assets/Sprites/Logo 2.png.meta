@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d1e7d878861133e4d946126102186a72
+guid: 6b9dcbc0657c05741a0987b162d1107b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 3
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -134,112 +134,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_0"
-      rect:
-        serializedVersion: 2
-        x: 84
-        y: 577
-        width: 65
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f99c7a909532f9b498ec816d61bccd68
-      internalID: -1115220263
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_1"
-      rect:
-        serializedVersion: 2
-        x: 84
-        y: 558
-        width: 65
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eaf443bd07bf4194588addc35a2a8d7d
-      internalID: 873023178
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_2"
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 599
-        width: 1
-        height: 1
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a146529b6e05e149b93c11a4ed9dee2
-      internalID: -666837968
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_3"
-      rect:
-        serializedVersion: 2
-        x: 84
-        y: 538
-        width: 65
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b68d751571766e442976adb7060d536c
-      internalID: 944189666
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_4"
-      rect:
-        serializedVersion: 2
-        x: 91
-        y: 6
-        width: 110
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 835fe694dcf638c4baec4373e741b1f9
-      internalID: -598535284
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -250,12 +145,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_0": -1115220263
-      "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_1": 873023178
-      "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_2": -666837968
-      "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_3": 944189666
-      "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_4": -598535284
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

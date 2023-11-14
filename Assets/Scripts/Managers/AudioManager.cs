@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] plingSounds;
     [SerializeField] private AudioClip  ballWall;
     [SerializeField] private AudioClip  ballPaddle;
+    [SerializeField] private AudioClip  paddleHit;
+    [SerializeField] private AudioClip  powerUp;
     
     public static AudioManager Instance;
     // Start is called before the first frame update
@@ -42,4 +44,16 @@ public class AudioManager : MonoBehaviour
         
         _audioSource.PlayOneShot(ballPaddle);
     }
+
+    public void PlayPaddleHit()
+    {
+        _audioSource.PlayOneShot(paddleHit);
+
+    }
+    public void PlayPowerUp()
+    {
+        _audioSource.PlayOneShot(powerUp);
+
+    }
+    
 }

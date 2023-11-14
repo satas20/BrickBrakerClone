@@ -1,16 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Unity.Mathematics;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] bool isEndless;
+    [SerializeField] bool isOnMenu = false;
     static public GameManager Instance;
     public GameState currentState;
     public static event Action<GameState> OnGameStateChanged;
@@ -39,9 +37,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateGameState(GameState.Waiting);
-    }
+        if (isOnMenu)
+        {UpdateGameState(GameState.Playing); }
 
+        else{ UpdateGameState(GameState.Waiting); }
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -52,8 +53,8 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(currentScene);
 
         }
-        if (bricks.Count == 0 && !isEndless){ 
-            UpdateGameState(GameState.Win);
+        if (bricks.Count == 0 ){ 
+            //UpdateGameState(GameState.Win);
             return; 
         }
         if(currentState==GameManager.GameState.Waiting&& Input.GetMouseButtonDown(0))
@@ -108,7 +109,7 @@ public class GameManager : MonoBehaviour
 
         OnGameStateChanged?.Invoke(currentState);
     }
-
+    
     private void HandleWaiting()
     {
         

@@ -32,7 +32,7 @@ public class WaveManager : MonoBehaviour
         {
             if (GameManager.Instance.currentState != GameManager.GameState.Playing)
             {
-                yield return new WaitForSeconds(1);
+                //yield return new WaitForSeconds(1);
             }
             switch (waveNum)
             {

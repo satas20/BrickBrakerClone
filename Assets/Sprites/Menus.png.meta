@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d1e7d878861133e4d946126102186a72
+guid: 3c3f3d1866525ae4d9cf065f8f8b65de
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 3
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -136,97 +136,97 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_0"
+      name: Menus_0
       rect:
         serializedVersion: 2
-        x: 84
-        y: 577
-        width: 65
-        height: 14
+        x: 713
+        y: 232
+        width: 126
+        height: 119
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f99c7a909532f9b498ec816d61bccd68
-      internalID: -1115220263
+      spriteID: dcae0f67678e6324e843516a5621453c
+      internalID: -1228320868
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_1"
+      name: Menus_1
       rect:
         serializedVersion: 2
-        x: 84
-        y: 558
-        width: 65
-        height: 15
+        x: 878
+        y: 233
+        width: 136
+        height: 125
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eaf443bd07bf4194588addc35a2a8d7d
-      internalID: 873023178
+      spriteID: a9111140fadbe7a46979cf6937bd36a2
+      internalID: -115942928
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_2"
+      name: Menus_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 599
-        width: 1
-        height: 1
+        x: 1049
+        y: 55
+        width: 846
+        height: 112
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a146529b6e05e149b93c11a4ed9dee2
-      internalID: -666837968
+      spriteID: 4695117241bf22c44afce0d59b6014e9
+      internalID: 2097318125
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_3"
+      name: Menus_3
       rect:
         serializedVersion: 2
-        x: 84
-        y: 538
-        width: 65
-        height: 15
+        x: 159
+        y: 130
+        width: 538
+        height: 46
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b68d751571766e442976adb7060d536c
-      internalID: 944189666
+      spriteID: 04acfd9d30403d045b313b45568a5c4f
+      internalID: -306908593
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_4"
+      name: Menus_4
       rect:
         serializedVersion: 2
-        x: 91
-        y: 6
-        width: 110
-        height: 14
+        x: 1464
+        y: 734
+        width: 123
+        height: 571
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,8 +234,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 835fe694dcf638c4baec4373e741b1f9
-      internalID: -598535284
+      spriteID: d7dd72ff711c4a64c8635ae90d9c74c9
+      internalID: -930733470
       vertices: []
       indices: 
       edges: []
@@ -251,11 +251,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_0": -1115220263
-      "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_1": 873023178
-      "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_2": -666837968
-      "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_3": 944189666
-      "WhatsApp G\xF6rsel 2023-10-22 saat 23.32.15_d4ff60ab_4": -598535284
+      Menus_0: -1228320868
+      Menus_1: -115942928
+      Menus_2: 2097318125
+      Menus_3: -306908593
+      Menus_4: -930733470
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

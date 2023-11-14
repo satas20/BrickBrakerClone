@@ -15,6 +15,24 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
+
+    public void pause()
+    {
+        if(GameManager.Instance.currentState==GameManager.GameState.Playing)
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Paused);
+        else if (GameManager.Instance.currentState == GameManager.GameState.Paused)
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Playing);
+    }
+
+    public void mute()
+    {
+        if (AudioListener.volume > 0)
+            AudioListener.volume = 0;
+        else
+        {
+            AudioListener.volume = 1;
+        }
+    }
     public void Quit()
     {
         Application.Quit();
