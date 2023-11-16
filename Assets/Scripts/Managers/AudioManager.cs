@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip  ballPaddle;
     [SerializeField] private AudioClip  paddleHit;
     [SerializeField] private AudioClip  powerUp;
+    [SerializeField] private AudioClip  laserShoot;
     
     public static AudioManager Instance;
     // Start is called before the first frame update
@@ -55,5 +56,8 @@ public class AudioManager : MonoBehaviour
         _audioSource.PlayOneShot(powerUp);
 
     }
-    
+    public void PlayLaserShoot()
+    {
+        _audioSource.PlayOneShot(laserShoot);
+    }
 }

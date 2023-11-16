@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    
+
     [SerializeField] bool isOnMenu = false;
     static public GameManager Instance;
     public GameState currentState;
@@ -19,6 +21,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] powerUpPrefs;
     [SerializeField] private int[] probabilites;
 
+    
+    [SerializeField] InterstitialAd InterAd;
+    [SerializeField] AdsInitializer adsInitializer;
 
     public enum GameState
     {
@@ -37,6 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+       
         if (isOnMenu)
         {UpdateGameState(GameState.Playing); }
 
@@ -119,7 +125,7 @@ public class GameManager : MonoBehaviour
     }
     private void HandleGameOver()
     {
-        
+        InterAd.ShowAd();
     }
     private void HandlePaused()
     {

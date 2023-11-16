@@ -703,6 +703,68 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 372741615}
+--- !u!1 &468193978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 468193979}
+  - component: {fileID: 468193982}
+  - component: {fileID: 468193981}
+  m_Layer: 0
+  m_Name: Adds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &468193979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468193978}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1097822536}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &468193981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468193978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c96cf0573f23ffb4ca38b38ec4c414ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidAdUnitId: Interstitial_Android
+  _iOsAdUnitId: Interstitial_iOS
+--- !u!114 &468193982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468193978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6447000251f1bf245bed44922401d501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidGameId: 5476519
+  _iOSGameId: 5476518
+  _testMode: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,7 +1657,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 468193979}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1097822537
@@ -1619,6 +1682,7 @@ MonoBehaviour:
   - {fileID: 8904902535159240174, guid: e19ae120c5753c0409d931316eb97309, type: 3}
   - {fileID: 8904902535159240174, guid: 9c8e5f0831b0c9243993ebe9b2013ef4, type: 3}
   probabilites: 180000001800000019000000
+  InterAd: {fileID: 468193981}
 --- !u!114 &1097822539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1667,6 +1731,7 @@ MonoBehaviour:
   ballPaddle: {fileID: 8300000, guid: 40060f699d5c8e0478d42b3667ed2054, type: 3}
   paddleHit: {fileID: 8300000, guid: ae4953fe01473774ea2849d74a19c7d8, type: 3}
   powerUp: {fileID: 8300000, guid: b0f8ab5bb60570d42b468886f7a7b16f, type: 3}
+  laserShoot: {fileID: 8300000, guid: 5ff8dc48891b93346abe04f26e8dcf93, type: 3}
 --- !u!114 &1097822541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3722,7 +3787,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2028688447
 RectTransform:
   m_ObjectHideFlags: 0

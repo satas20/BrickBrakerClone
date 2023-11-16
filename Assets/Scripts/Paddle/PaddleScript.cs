@@ -65,7 +65,7 @@ public class PaddleScript : MonoBehaviour
 
         laserCount--;
         EventManager.Instance.InvokePaddleHit();
-
+        AudioManager.Instance.PlayLaserShoot();
         GameObject laser=Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
         laser.GetComponent<Rigidbody2D>().AddForce(Vector2.up*laserSpeed,ForceMode2D.Impulse);
     }
