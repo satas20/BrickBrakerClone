@@ -30,11 +30,9 @@ You can adjust the ball's bounce from the paddle  according to the touch point o
 - You can heal with health pwoerup.
    
 ## Itch.io
-You can play it on your browser or by downloading it from the Itch.io page  
+You can play it on your browser or by downloading it from the Itch.io page: [BrickBrakerClone](https://satas20.itch.io/brickbrakerclone).
 
-Clone: [satas20/BrickBrakerClone](https://satas20.itch.io/brickbrakerclone).
-
-Mobile: 
+You can download it from the Play Store: [RetroBreakout GooglePlay](https://play.google.com/store/apps/details?id=com.ataayyldz.retrobreakout).
 
 ## Preview
 
